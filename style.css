@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #202020;
+}
+
+.carousel-container {
+  margin: 2rem;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  transition: opacity 300ms;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
+}
+
+.carousel-btn {
+  position: fixed;
+  bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.carousel-btn.prev {
+  left: 2rem;
+}
+
+.carousel-btn.next {
+  right: 2rem;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(74, 74, 74, 0.5);
+}
+
+.title {
+  position: fixed;
+  bottom: 1.2rem;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 1rem;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  transition: opacity 300ms;
+}
+
+@media (max-width: 600px) {
+  .carousel-container {
+    margin: 1rem;
+  }
+
+  .carousel-btn {
+    padding: 8px;
+    font-size: 16px;
+  }
+}

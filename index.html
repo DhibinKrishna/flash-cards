@@ -3,141 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Carousel</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #f0f0f0;
-      }
-
-      .carousel-container {
-        width: 100%;
-        max-width: 800px;
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
-
-      .carousel {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-      }
-
-      .carousel img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        flex-shrink: 0;
-      }
-
-      .carousel-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        font-size: 18px;
-        border-radius: 5px;
-      }
-
-      .carousel-btn.prev {
-        left: 10px;
-      }
-
-      .carousel-btn.next {
-        right: 10px;
-      }
-
-      .carousel-btn:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
-
-      @media (max-width: 600px) {
-        .carousel-container {
-          max-width: 100%;
-        }
-
-        .carousel-btn {
-          padding: 8px;
-          font-size: 16px;
-        }
-      }
-    </style>
+    <title>Flash cards</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta
+      name="description"
+      content="A fun and interactive flash card slider for kids to learn to identify objects, their characteristics.."
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon-16x16.png"
+    />
+    <script defer src="script.js"></script>
   </head>
-  <body>
+  <body onload="onLoad()">
     <div class="carousel-container">
-      <div class="carousel">
-        <img src="./images/fruits/apple.png" alt="Apple" />
-        <img src="./images/fruits/banana.png" alt="Banana" loading="lazy" />
-        <img src="./images/fruits/orange.png" alt="Orange" loading="lazy" />
-        <img src="./images/fruits/papaya.png" alt="Papaya" loading="lazy" />
-        <img src="./images/fruits/grapes.png" alt="Grapes" loading="lazy" />
-        <img src="./images/fruits/guava.png" alt="Guava" loading="lazy" />
-      </div>
-      <button class="carousel-btn prev" onclick="moveSlide(-1)">
-        &#10094;
-      </button>
-      <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+      <div class="carousel"></div>
     </div>
-
-    <script>
-      let currentIndex = 0;
-      const slides = document.querySelector(".carousel");
-      const totalSlides = document.querySelectorAll(".carousel img").length;
-      let autoSlideInterval;
-      let touchStartX = 0;
-      let touchEndX = 0;
-      const swipeThreshold = 50;
-
-      function moveSlide(direction) {
-        currentIndex += direction;
-
-        // Loop around
-        if (currentIndex >= totalSlides) {
-          currentIndex = 0;
-        } else if (currentIndex < 0) {
-          currentIndex = totalSlides - 1;
-        }
-
-        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
-
-      slides.addEventListener("touchstart", (e) => {
-        touchStartX = e.touches[0].clientX;
-      });
-
-      slides.addEventListener("touchend", (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-        handleSwipe();
-      });
-
-      function handleSwipe() {
-        const swipeDistance = touchEndX - touchStartX;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-          if (swipeDistance > 0) {
-            // Swiped right
-            moveSlide(-1);
-          } else {
-            // Swiped left
-            moveSlide(1);
-          }
-        }
-      }
-    </script>
+    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+    <span id="title" class="title">Show title</span>
   </body>
 </html>
