@@ -104,13 +104,13 @@ function moveSlide(direction) {
   title.style.opacity = "0";
 
   setTimeout(() => {
+    img.style.opacity = "1";
+    title.style.opacity = "1";
     img.src = data[currentIndex].src;
     img.width = data[currentIndex].width;
     img.height = data[currentIndex].height;
     img.alt = data[currentIndex].alt;
-    img.style.opacity = "1";
     title.innerHTML = data[currentIndex].alt;
-    title.style.opacity = "1";
   }, 300);
 }
 
