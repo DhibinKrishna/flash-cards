@@ -53,16 +53,19 @@ body {
   width: 100%;
 }
 
-.carousel {
-  max-height: 70vh;
-}
-
 img {
   border-radius: 1rem;
   max-height: 70vh;
   max-width: 90vw;
   object-fit: contain;
   transition: opacity 300ms;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
+}
+
+#colourDiv {
+  width: 60vw;
+  height: 70vh;
+  border-radius: 1rem;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
 }
 

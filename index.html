@@ -31,15 +31,18 @@
       <button class="category-btn" onclick="selectCategory('fruits')">
         Fruits
       </button>
+      <button class="category-btn" onclick="selectCategory('colours')">
+        Colours
+      </button>
     </div>
     <div id="content" style="display: none">
       <div class="header">
         <button class="carousel-btn home-btn" onclick="goHome()">Home</button>
       </div>
-      <div class="carousel"></div>
+      <div id="carousel"></div>
       <div class="footer">
         <button class="carousel-btn" onclick="moveSlide(-1)">&#10094;</button>
-        <span id="title" class="title">Show title</span>
+        <span id="title" class="title"></span>
         <button class="carousel-btn" onclick="moveSlide(1)">&#10095;</button>
       </div>
     </div>
