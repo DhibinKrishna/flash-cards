@@ -137,15 +137,13 @@ function moveSlide(direction) {
   img.style.opacity = "0.5";
   title.style.opacity = "0.5";
 
-  setTimeout(() => {
+  img.src = data[category][currentIndex].src;
+  img.alt = data[category][currentIndex].alt;
+  img.onload = () => {
     img.style.opacity = "1";
     title.style.opacity = "1";
-    img.src = data[category][currentIndex].src;
-    img.alt = data[category][currentIndex].alt;
-    img.onload = () => {
-      title.innerHTML = data[category][currentIndex].alt;
-    };
-  }, 150);
+    title.innerHTML = data[category][currentIndex].alt;
+  };
 }
 
 function handleSwipe() {
