@@ -7,7 +7,7 @@
 body {
   font-family: Arial, sans-serif;
   height: 100vh;
-  background-color: #202020;
+  background: linear-gradient(135deg, #091e45, #2a5298);
   color: white;
 }
 
@@ -21,13 +21,15 @@ body {
 }
 
 .category-btn {
-  background-color: #333;
+  background-color: #091e45;
   color: white;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
+  outline: 1px solid white;
+  width: 70vw;
 }
 
 .category-btn:hover {
@@ -53,13 +55,20 @@ body {
   width: 100%;
 }
 
-img {
+#img {
   border-radius: 1rem;
   max-height: 70vh;
   max-width: 90vw;
   object-fit: contain;
   transition: opacity 300ms;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
+}
+
+#shapeImg {
+  border-radius: 1rem;
+  max-height: 70vh;
+  max-width: 90vw;
+  object-fit: contain;
 }
 
 #colourDiv {
@@ -104,6 +113,9 @@ img {
 }
 
 @media (min-width: 600px) {
+  .category-btn {
+    width: 20vw;
+  }
   .title {
     width: 50vw;
   }

@@ -140,6 +140,36 @@ const data = {
       name: "Cyan",
     },
   ],
+  shapes: [
+    {
+      alt: "Circle",
+      src: "./images/shapes/circle.svg",
+    },
+    {
+      alt: "Triangle",
+      src: "./images/shapes/triangle.svg",
+    },
+    {
+      alt: "Square",
+      src: "./images/shapes/square.svg",
+    },
+    {
+      alt: "Rectangle",
+      src: "./images/shapes/rectangle.svg",
+    },
+    {
+      alt: "Pentagon",
+      src: "./images/shapes/pentagon.svg",
+    },
+    {
+      alt: "Hexagon",
+      src: "./images/shapes/hexagon.svg",
+    },
+    {
+      alt: "Star",
+      src: "./images/shapes/star.svg",
+    },
+  ],
 };
 
 carousel.addEventListener("touchstart", (e) => {
@@ -168,6 +198,16 @@ function initialize() {
     colourDiv.style.backgroundColor = data[category][0].code;
     carousel.appendChild(colourDiv);
     title.innerHTML = data[category][0].name;
+  } else if (category === "shapes") {
+    const img = document.createElement("img");
+    img.id = "shapeImg";
+    img.src = data[category][0].src;
+    img.alt = data[category][0].alt;
+    img.style.fill = getRandomColour();
+    img.onload = () => {
+      title.innerHTML = data[category][0].alt;
+    };
+    carousel.appendChild(img);
   } else {
     const img = document.createElement("img");
     img.id = "img";
@@ -178,18 +218,6 @@ function initialize() {
     };
     carousel.appendChild(img);
   }
-}
-
-function goHome() {
-  document.getElementById("home").style.display = "flex";
-  document.getElementById("content").style.display = "none";
-  const img = document.getElementById("img");
-  img?.remove();
-  const colourDiv = document.getElementById("colourDiv");
-  colourDiv?.remove();
-  const title = document.getElementById("title");
-  title.innerHTML = "";
-  currentIndex = 0;
 }
 
 function moveSlide(direction) {
@@ -207,6 +235,14 @@ function moveSlide(direction) {
     const colourDiv = document.getElementById("colourDiv");
     colourDiv.style.backgroundColor = data[category][currentIndex].code;
     title.innerHTML = data[category][currentIndex].name;
+  } else if (category === "shapes") {
+    const img = document.getElementById("shapeImg");
+    img.src = data[category][currentIndex].src;
+    img.alt = data[category][currentIndex].alt;
+    img.setAttribute("fill", getRandomColour());
+    img.onload = () => {
+      title.innerHTML = data[category][currentIndex].alt;
+    };
   } else {
     const img = document.getElementById("img");
     img.style.opacity = "0.5";
@@ -222,6 +258,20 @@ function moveSlide(direction) {
   }
 }
 
+function goHome() {
+  document.getElementById("home").style.display = "flex";
+  document.getElementById("content").style.display = "none";
+  const img = document.getElementById("img");
+  img?.remove();
+  const shapeImg = document.getElementById("shapeImg");
+  shapeImg?.remove();
+  const colourDiv = document.getElementById("colourDiv");
+  colourDiv?.remove();
+  const title = document.getElementById("title");
+  title.innerHTML = "";
+  currentIndex = 0;
+}
+
 function handleSwipe() {
   const swipeDistance = touchEndX - touchStartX;
 
@@ -232,4 +282,9 @@ function handleSwipe() {
       moveSlide(+1); // Swiped left
     }
   }
+}
+
+function getRandomColour() {
+  const randomIndex = Math.floor(Math.random() * data.colours.length);
+  return data.colours[randomIndex].code;
 }
