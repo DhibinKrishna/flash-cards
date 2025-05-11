@@ -3,69 +3,86 @@ const carousel = document.querySelector(".carousel");
 let touchStartX = 0;
 let touchEndX = 0;
 const swipeThreshold = 50;
+let category = "animals";
 
-const data = [
-  {
-    src: "./images/fruits/apple.png",
-    width: "512",
-    height: "512",
-    alt: "Apple",
-  },
-  {
-    src: "./images/fruits/banana.png",
-    width: "512",
-    height: "512",
-    alt: "Banana",
-  },
-  {
-    src: "./images/fruits/orange.png",
-    width: "512",
-    height: "512",
-    alt: "Orange",
-  },
-  {
-    src: "./images/fruits/papaya.png",
-    width: "512",
-    height: "512",
-    alt: "Papaya",
-  },
-  {
-    src: "./images/fruits/grapes.png",
-    width: "512",
-    height: "512",
-    alt: "Grapes",
-  },
-  {
-    src: "./images/fruits/guava.png",
-    width: "512",
-    height: "512",
-    alt: "Guava",
-  },
-  {
-    src: "./images/fruits/pineapple.png",
-    width: "341",
-    height: "512",
-    alt: "Pineapple",
-  },
-  {
-    src: "./images/fruits/pomegranate.png",
-    width: "512",
-    height: "512",
-    alt: "Pomegranate",
-  },
-  {
-    src: "./images/fruits/watermelon.png",
-    width: "512",
-    height: "512",
-    alt: "Watermelon",
-  },
-  {
-    src: "./images/fruits/jackfruit.png",
-    width: "512",
-    height: "512",
-    alt: "Jackfruit",
-  },
-];
+const data = {
+  fruits: [
+    {
+      src: "./images/fruits/apple.png",
+      alt: "Apple",
+    },
+    {
+      src: "./images/fruits/banana.png",
+      alt: "Banana",
+    },
+    {
+      src: "./images/fruits/orange.png",
+      alt: "Orange",
+    },
+    {
+      src: "./images/fruits/mango.png",
+      alt: "Mango",
+    },
+    {
+      src: "./images/fruits/papaya.png",
+      alt: "Papaya",
+    },
+    {
+      src: "./images/fruits/grapes.png",
+      alt: "Grapes",
+    },
+    {
+      src: "./images/fruits/guava.png",
+      alt: "Guava",
+    },
+    {
+      src: "./images/fruits/pineapple.png",
+      alt: "Pineapple",
+    },
+    {
+      src: "./images/fruits/pomegranate.png",
+      alt: "Pomegranate",
+    },
+    {
+      src: "./images/fruits/watermelon.png",
+      alt: "Watermelon",
+    },
+    {
+      src: "./images/fruits/jackfruit.png",
+      alt: "Jackfruit",
+    },
+    {
+      src: "./images/fruits/strawberry.png",
+      alt: "Strawberry",
+    },
+    {
+      src: "./images/fruits/avocado.png",
+      alt: "Avocado",
+    },
+  ],
+  animals: [
+    {
+      src: "./images/animals/cat.png",
+      alt: "Cat",
+    },
+    {
+      src: "./images/animals/dog.png",
+      alt: "Dog",
+    },
+    {
+      src: "./images/animals/elephant.png",
+      alt: "Elephant",
+    },
+    {
+      src: "./images/animals/lion.png",
+      alt: "Lion",
+    },
+    {
+      src: "./images/animals/giraffe.png",
+      alt: "Giraffe",
+    },
+  ],
+};
 
 carousel.addEventListener("touchstart", (e) => {
   touchStartX = e.touches[0].clientX;
@@ -76,42 +93,55 @@ carousel.addEventListener("touchend", (e) => {
   handleSwipe();
 });
 
-function onLoad() {
+function initialize() {
   const img = document.createElement("img");
-  img.id = "img";
-  img.src = data[0].src;
-  img.width = data[0].width;
-  img.height = data[0].height;
-  img.alt = data[0].alt;
-  carousel.appendChild(img);
   const title = document.getElementById("title");
-  title.innerHTML = data[0].alt;
+  img.id = "img";
+  img.src = data[category][0].src;
+  img.alt = data[category][0].alt;
+  carousel.appendChild(img);
+  title.innerHTML = data[category][0].alt;
+}
+
+function selectCategory(selectedCategory) {
+  category = selectedCategory;
+  initialize();
+  currentIndex = 0;
+  document.getElementById("home").style.display = "none";
+  document.getElementById("content").style.display = "flex";
+}
+
+function goHome() {
+  document.getElementById("home").style.display = "flex";
+  document.getElementById("content").style.display = "none";
+  const img = document.getElementById("img");
+  img.remove();
+  const title = document.getElementById("title");
+  title.innerHTML = "";
+  currentIndex = 0;
 }
 
 function moveSlide(direction) {
   currentIndex += direction;
 
-  if (currentIndex >= data.length) {
+  if (currentIndex >= data[category].length) {
     currentIndex = 0;
   } else if (currentIndex < 0) {
-    currentIndex = data.length - 1;
+    currentIndex = data[category].length - 1;
   }
 
-  // carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
   const img = document.getElementById("img");
   const title = document.getElementById("title");
-  img.style.opacity = "0";
-  title.style.opacity = "0";
+  img.style.opacity = "0.5";
+  title.style.opacity = "0.5";
 
   setTimeout(() => {
     img.style.opacity = "1";
     title.style.opacity = "1";
-    img.src = data[currentIndex].src;
-    img.width = data[currentIndex].width;
-    img.height = data[currentIndex].height;
-    img.alt = data[currentIndex].alt;
-    title.innerHTML = data[currentIndex].alt;
-  }, 300);
+    img.src = data[category][currentIndex].src;
+    img.alt = data[category][currentIndex].alt;
+    title.innerHTML = data[category][currentIndex].alt;
+  }, 150);
 }
 
 function handleSwipe() {
@@ -121,7 +151,7 @@ function handleSwipe() {
     if (swipeDistance > 0) {
       moveSlide(-1); // Swiped right
     } else {
-      moveSlide(1); // Swiped left
+      moveSlide(+1); // Swiped left
     }
   }
 }
