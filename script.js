@@ -93,22 +93,24 @@ carousel.addEventListener("touchend", (e) => {
   handleSwipe();
 });
 
-function initialize() {
-  const img = document.createElement("img");
-  const title = document.getElementById("title");
-  img.id = "img";
-  img.src = data[category][0].src;
-  img.alt = data[category][0].alt;
-  carousel.appendChild(img);
-  title.innerHTML = data[category][0].alt;
-}
-
 function selectCategory(selectedCategory) {
   category = selectedCategory;
   initialize();
   currentIndex = 0;
   document.getElementById("home").style.display = "none";
   document.getElementById("content").style.display = "flex";
+}
+
+function initialize() {
+  const img = document.createElement("img");
+  const title = document.getElementById("title");
+  img.id = "img";
+  img.src = data[category][0].src;
+  img.alt = data[category][0].alt;
+  img.onload = () => {
+    title.innerHTML = data[category][0].alt;
+  };
+  carousel.appendChild(img);
 }
 
 function goHome() {
@@ -140,7 +142,9 @@ function moveSlide(direction) {
     title.style.opacity = "1";
     img.src = data[category][currentIndex].src;
     img.alt = data[category][currentIndex].alt;
-    title.innerHTML = data[category][currentIndex].alt;
+    img.onload = () => {
+      title.innerHTML = data[category][currentIndex].alt;
+    };
   }, 150);
 }
 
